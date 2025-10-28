@@ -8,8 +8,7 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "telnet-client": "^2.2.6"
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.4",

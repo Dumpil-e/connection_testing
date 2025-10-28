@@ -1,10 +1,10 @@
 import express from 'express';
-import routes from './api/routes';
+import switchRoutes from './api/networkDevices/switch/index';
 import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 app.use(express.json());
-app.use('/api', routes);
+app.use('/api/switch', switchRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;

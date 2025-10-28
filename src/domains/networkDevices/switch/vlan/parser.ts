@@ -1,4 +1,4 @@
-import { VlanInfo } from '@/telnet';
+import { VlanInfo } from './types';
 
 export function parseFullVlanOutput(raw: string): VlanInfo {
     const lines = raw.split('\n').map(line => line.trim()).filter(Boolean);
@@ -13,13 +13,11 @@ export function parseFullVlanOutput(raw: string): VlanInfo {
         const vlan: any = {};
         const blockLines = block.split('\n').map(l => l.trim()).filter(Boolean);
 
-        // первая строка содержит VID
         const firstLine = blockLines[0];
         const vidMatch = firstLine.match(/^(\d+)/);
         if (vidMatch) vlan.vid = vidMatch[1];
 
         for (const line of blockLines) {
-            // ищем все пары "ключ : значение" в строке
             const regex = /([A-Za-z\s]+?)\s*:\s*([^\s:][^:]*?)(?=\s{2,}[A-Za-z\s]+?\s*:|$)/g;
             const matches = [...line.matchAll(regex)];
 
@@ -55,3 +53,6 @@ function assignVlanField(vlan: any, key: string, value: string) {
         case 'Forbidden Ports': vlan.forbiddenPorts = value; break;
     }
 }
+
+// TODO: заменить any на Partial<VlanEntry>
+// TODO: вынести assignVlanField в utils.ts

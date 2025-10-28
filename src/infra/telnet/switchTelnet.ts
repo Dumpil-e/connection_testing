@@ -64,3 +64,7 @@ export async function switchTelnet(address: string, command: string): Promise<st
         socket.connect(23, address);
     });
 }
+
+// TODO: добавить retry-логику
+// TODO: вынести таймаут и порт в конфиг
+// TODO: логировать команды через logger
